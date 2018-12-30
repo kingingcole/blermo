@@ -1,0 +1,122 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'users/css/account.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="text-center mt-5 container">
+        <h2 class="mt-5" style='color:rgba(44, 140, 83)'>Login</h2>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="my-3 msg-container container">
+        <div class="row text-center alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+    <form action="" method="POST" class="">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+
+                {% if form.errors %}
+                <div class="col-12">
+                    <p style="color: red" class="my-2">
+                        Your password and username did not match. <br>Note that both fields may be case sensitive.
+                    </p>
+                </div>
+                {% endif %}
+                <div class="col-12 form-group">
+                    <p class="errors">
+                        {{ form.username.errors}}
+                    </p>
+                    <p>
+                        {{ form.username.label_tag}}
+                    </p>
+                    <div>
+                        {{ form.username }}
+                    </div>
+                    <small>
+                        {{ form.username.help_text }}
+                    </small>
+                    <hr>
+                </div>
+
+                <div class="col-12 form-group">
+                    <p class="errors">
+                        {{ form.password.errors}}
+                    </p>
+                    <p>
+                        {{ form.password.label_tag}}
+                    </p>
+                    <p>
+                        {{ form.password }}
+                    </p>
+                    <small>
+                        {{ form.password.help_text }}
+                    </small>
+                    <hr>
+                </div>
+            </div>
+            <button class="login-btn" type="submit">Login</button>
+        </div>
+    </form>
+</section>
+
+
+<style media="screen">
+  section{
+    margin: 100px 0 50px 0
+  }
+
+  form,
+  .msg-container {
+      max-width: 500px !important;
+      margin: 50px auto !important;
+      padding: 20px 10px;
+      margin-bottom: 0 !important;
+  }
+  form{
+    margin-top: 10px !important
+  }
+  .form-group{
+    height: 110px;
+    margin: 0;
+    padding: 0 auto
+  }
+
+  label{
+    font-weight: 700
+  }
+  input{
+    width: 100%;
+    height: 40px;
+    border: 1px solid rgba(44, 140, 83, 0.5);
+    padding: 0 10px
+  }
+
+  button.login-btn{
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    background: rgba(44, 140, 83, 0.9);
+    color: white;
+    font-weight: 800;
+    cursor: pointer
+  }
+
+  button.login-btn:hover{
+    background: rgba(44, 140, 83, 1);
+  }
+</style>
+
+{% endblock %}

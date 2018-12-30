@@ -1,0 +1,47 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'users/css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="mt-5 container cont">
+        <div class="row bg-light py-4">
+            <div class="col-10 mx-auto text-center">
+                <div class="col-12 mb-5">
+                    <h2>You have been logged out!</h2>
+                </div>
+                <div class="col-12">
+                    <a  href="{% url 'login' %}" class="btn btn-1 m-2">Log back in</a>
+                    <a  href="{% url 'index' %}" class="btn btn-2 m-2">Go to home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+
+    a.btn-2{
+        padding:10px !important;
+        color: gray !important;
+        border: 1px solid gray !important;
+    }
+    a.btn-2:hover{
+        color:white !important;
+        background-color: gray !important;
+    }
+    .cont{
+        max-width: 700px;
+    }
+    h2{
+        min-width: 50px;
+    }
+</style>
+
+{% endblock %}

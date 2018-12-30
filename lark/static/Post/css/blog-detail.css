@@ -1,0 +1,132 @@
+section {
+  font-family: 'Open Sans', sans-serif;
+  color: #444;
+  font-weight: 100;
+}
+
+.author-post-details {
+  background: rgba(30, 130, 76, 0.1)
+}
+
+.author-image {
+  height: 65px;
+  width: 65px;
+  padding: 3px 3px;
+  border: 1px solid rgba(30, 130, 76, 0.9)
+}
+
+.author-fullname {
+  font-size: 23px !important;
+  margin: auto;
+  width: 50%
+}
+
+.follow-toggle {
+  background: none;
+  padding: 8px 10px;
+  border: 1px solid rgba(30, 130, 76, 0.8);
+  color: rgba(30, 130, 76, 0.8);
+  font-size: 0.8em;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.follow-toggle:hover {
+  color: white;
+  background-color: rgba(30, 130, 76, 0.8);
+  border:
+}
+
+.follow-toggle:active {
+  box-shadow: none
+}
+
+.post-upload-time {
+  font-size: 14px !important
+}
+
+.post-title {
+  font-weight: 600;
+  color: rgba(30, 130, 76);
+  text-transform: capitalize;
+  font-size: 2.6rem !important
+}
+
+.main-post {
+  line-height: 1.8em;
+  font-size: 1.1rem
+}
+
+.interactions .fa-star-of-life,
+.interactions span,
+.interactions .far {
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+a.like-toggle:active,
+a.like-toggle:focus, {
+  border: none !important;
+  outline: none !important
+}
+
+.liked {
+  color: rgb(115, 35, 71) !important;
+}
+
+.liked:active {
+  box-shadow: none;
+}
+
+.commenter-img {
+  height: 55px;
+  width: 55px;
+  padding: 3px 3px;
+  border: 1px solid rgba(30, 130, 76, 0.9)
+}
+
+.timestamp {
+  font-size: 0.7em
+}
+
+.profile-link {
+  color: rgba(115, 35, 71)
+}
+
+@media screen and (min-width:990px) {
+  .author-image {
+    height: 100px;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid rgba(30, 130, 76, 0.9)
+  }
+
+  .author-post-details {
+    padding: 50px 0 !important;
+  }
+
+  .author-fullname {
+    font-size: 35px !important;
+    font-weight: 500
+  }
+
+  .follow-toggle {
+    padding: 4px 20px;
+    font-size: 1.2em;
+    border-radius: 4px;
+    border: 1px solid rgba(30, 130, 76, 0.9)
+  }
+
+  .post-upload-time {
+    font-size: 20px !important
+  }
+
+  .post-title {
+    font-size: 2.4em;
+    font-weight: 600;
+    color: rgba(30, 130, 76);
+  }
+}

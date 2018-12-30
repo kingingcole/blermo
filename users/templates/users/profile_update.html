@@ -1,0 +1,23 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'users/css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="text-center container">
+        <h2>Join The Community</h2>
+    </div>
+    <form action="" method="POST" class="bg-light" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ u_form.as_p }}
+        {{ p_form.as_p }}
+        <button class="btn" type="submit">Update</button>
+    </form>
+</section>
+
+{% endblock %}

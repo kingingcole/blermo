@@ -1,0 +1,44 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'main_site/css/custom-css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <img src="{% static 'main_site/img/about.jpg' %}" alt="" class="d-block mx-auto img-fluid">
+            </div>
+            <p class="lead">
+                <span class="lark">blermo </span>is Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim ipsam
+                delectus cum officiis earum non, aut! Dolorem iure soluta amet. Qui est reiciendis distinctio quas
+                harum, obcaecati architecto consequuntur inventore rem, beatae ex aliquam quaerat. Facilis quos beatae
+                fuga reiciendis assumenda consequuntur laborum necessitatibus animi dignissimos at esse quasi, minima
+                ipsam qui quam, nesciunt repudiandae ullam mollitia tenetur. Nam iusto vero totam molestias consequatur
+                accusamus, fuga expedita asperiores cum nisi autem, dolor necessitatibus! Iure quos, minus vero eius
+                iste a, eveniet provident nulla. Aspernatur cumque, dolorem ipsam sunt porro vitae quod accusamus
+                eveniet soluta, ducimus, qui repellendus distinctio molestias molestiae.
+            </p>
+
+            <p class=" lead">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum dolore accusantium velit, minus
+                consequatur ipsa nulla blanditiis fugiat illo, doloremque! Minus odit, quidem quae eveniet quos
+                voluptatum autem maxime nemo odio vero quia, omnis tempora fugiat, cum magnam nesciunt natus ut eius
+                ducimus dolorem aliquid cumque neque voluptatibus. Omnis impedit corporis, aperiam fuga, voluptatibus
+                sunt harum! Reiciendis corrupti accusantium, assumenda itaque consequuntur molestiae sequi tempore
+                laborum, architecto rem quod praesentium.
+            </p>
+            <div class="row mt-5">
+                <a class="col-2 mx-auto jtc text-center mb-5" href="{% url 'register' %}">Join The Community</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'post/css/feed.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        {% if no_of_posts <= 0 %}
+        <div class="row">
+            <div class="col-12 my-5 py-5">
+                <h2 class="text-center">No posts to display!</h2>
+            </div>
+        </div>
+        {% else %}
+        <div class="row">
+
+            {% for post in posts %}
+            <div class=" post-con col-sm-12 col-md-6 col-lg-4 py-5">
+                {% if post.image %}
+                <div class="post-img">
+                    <a href="{% url 'post_detail' slug=post.slug %}"><img src="{{ post.image.url }}" alt="img" class="img-fluid post-img"></a>
+                </div>
+                {% endif %}
+                <h1 class="my-4 post-title"><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h1>
+                <div class="post-details">
+                    <img src="{{ post.author.profile.avatar.url }}" alt="author image" class="author-img rounded-circle">
+                    <span>
+                       <a href="{% url 'profile' post.author.username %}" class="author">{{ post.author.username }}</a> · <span class="timestamp">{{ post.whenpublished }}</span>
+                    </span>
+                </div>
+                <div class="my-4 post-content">
+                    <p>{{ post.summary }}</p>
+                </div>
+                <div class="interactions mt-2">
+                    <i class="fas fa-heart"></i>
+                    <span>{{ post.likes.count }}</span>
+                    <i class="far fa-comments"></i><span> {{ post.comment_set.count }}</span>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% if post.img %}
+    x = post.image.url
+{% endif %}
+
+<style>
+  .post-title {
+    font-size: 2em;
+    min-height: 120px;
+    border-bottom: 1px solid lightgray
+  }
+  span.timestamp{
+    font-size:0.9em !important
+  }
+  .fa-heart {
+    color: rgb(115, 35, 71) !important
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="text-center col-md-8 offset-md-2">
+                {% for following in f_u_p %}
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                        <img src="{{ following.avatar.url }}" class="rounded-circle img-fluid" alt="">
+                    </div>
+                    <div class="col-md-8 my-auto">
+                        <h4>{{ following.get_full_name }}</h4>
+                        <h5>{{ following.user.username }}</h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

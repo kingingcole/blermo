@@ -1,0 +1,205 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'Post/css/blog-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container-fluid">
+        <div class="text-center py-3 author-post-details row">
+        <div class="col-12">
+            <img src="{{ post.author.profile.avatar.url }}" alt=""
+                 class="mx-auto text-center rounded-circle author-image">
+        </div>
+
+        <div class="col-12 my-3">
+            <a href="{% url 'profile' post.author.username %}" class="profile-link mx-auto d-block author-fullname mb-2 ">{{ post.author.profile.get_full_name }}</a>
+            {% if post.author != user %}
+            <span class="text-center mx-auto  follow-toggle">
+                {% if user.is_authenticated %}
+                    {% if post.author.profile in user.profile.follows.all %}
+                        <a id="follow-btn" href="">Unfollow</a>
+                    {% else %}
+                        <a id="follow-btn" href="">Follow</a>
+                    {% endif %}
+                {% else %}
+                    <a id="follow-btn" href="">Login to follow user</a>
+                {% endif %}
+            </span>
+            {% endif %}
+        </div>
+        <div class="col-12 post-upload-time">
+            <p>{{ post.whenpublished }}</p>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+
+
+                <div class="post-content pt-5">
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    <img src="{{ post.image.url }}" alt="" class="my-3 mx-auto text-center post-image img-fluid">
+                    <p class="lead main-post">{{ post.content }}</p>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-8">
+                    <div class="interactions">
+                        <a class="like-toggle fas fa-heart {% if user in post.likes.all %}liked{% endif %}"></a><span class="mr-3" id="like-count"> {{ post.likes.count }}</span>
+                        <i class="far fa-comments"></i><span id="comment-count"> {{ post.comment_set.count }}</span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                  {% if post.author == user %}
+                  <div class="mx-auto text-right" style="color: rgb(115, 35, 71)">
+                    <span class="mr-2"><a href="{% url 'post_update' slug=post.slug %}">edit</a></span>
+                    <span><a href="{% url 'post_delete' slug=post.slug %}">delete</a></span>
+                  </div>
+                  {% endif %}
+                  </div>
+                </div>
+
+                <div id="commentBox" class="comments py-3 my-4 ">
+
+                  {% if user.is_authenticated %}
+                    <form action="{% url 'post_comment' slug=post.slug %}" method="post">
+                      {% csrf_token %}
+                      {{comment_form.text}}
+                      <button type="submit" name="button" id='comment-submit' class="ml-auto">comment</button>
+                    </form>
+                  {% else %}
+                  <p class="mb-3">You must be <a style='color:rgb(115, 35, 71)' href="{% url 'login' %}">signed in</a> to comment.</p>
+                  {% endif %}
+
+
+                  {% for comment in post.comment_set.all %}
+                    <div class="row my-3">
+                      <div class="col-3 text-center">
+                        <img src="{{ comment.comment_by.profile.avatar.url }}" alt="" class="img-fluid rounded-circle  commenter-img">
+                      </div>
+                      <div class="col-9 my-auto px-0">
+                        <a href="{% url 'profile' comment.comment_by.username %}" class="profile-link">{{ comment.comment_by.username }}</a>  <span class="my-auto timestamp">{{ comment.whenpublished }}</span>
+                        <p class="muted mt-2">{{ comment.text }}</p>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+<style media="screen">
+#commentBox{
+  padding-top: 70px !important;
+  margin-top: 0 !important
+}
+
+#id_text{
+  display:block;
+  width: 100%;
+  padding: 10px ;
+  border-radius: 4px;
+  border: 1.2px solid #c3c3c3;
+  height: 50px
+}
+#id_text::placeholder{
+  font-size: 0.9em;
+  letter-spacing: 1px;
+
+}
+
+.comments {
+  border-radius: 0px;
+  background: none
+}
+
+button#comment-submit{
+  display: block !important;
+  padding: 5px 17px;
+  cursor: pointer;
+  background: none;
+  border: 1px solid rgb(115, 35, 71);
+  text-align: right;
+  color: rgb(115, 35, 71);
+  margin-top: 10px;
+  transition: 0.1s
+}
+
+button#comment-submit:hover{
+  background: rgb(115, 35, 71);
+  color: white
+}
+</style>
+
+{% endblock %}
+
+
+
+{% block javascript %}
+
+<script>
+     $(".like-toggle").click(function(e){
+        e.preventDefault();
+
+        $.ajax({
+          url: '{% url 'post_like_toggle' %}',
+          data: {
+            "slug": '{{ post.slug }}',
+            "user": '{{ user.username }}',
+          },
+          dataType: "json",
+          success: function(data) {
+            var n_o_l = parseInt(data.likes);
+            var likeCount = document.getElementById('like-count');
+            likeCount.innerText = ' ' + n_o_l;
+          }
+        })
+
+        {% if user.is_authenticated %}$(".like-toggle").toggleClass('liked'){% endif %};
+    })
+
+     $(".follow-toggle a").click(function(e){
+      e.preventDefault()
+     })
+
+     $("span.follow-toggle").click(function(e){
+
+       $.ajax({
+         url:'{% url 'follow_toggle' %}',
+         type: 'GET',
+         data: {
+           "userToFollow": '{{ post.author }}',
+           "userFollowing": '{{ user.username }}',
+         },
+         dataType: "Intelligent Guess",
+
+
+       });
+
+      {% if user.is_authenticated %}
+       var x = document.getElementById('follow-btn');
+       if (x.innerText === 'Unfollow'){
+         x.innerText = 'Follow';
+       } else{
+         x.innerText = 'Unfollow'
+       }
+       {% endif %}
+     })
+
+
+
+</script>
+
+{% endblock %}

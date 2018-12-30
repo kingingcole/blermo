@@ -1,0 +1,26 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'Post/css/feed.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <h2>Confirm Delete?</h2>
+                    <button class="btn btn-outline-danger" type="submit">Yes</button>
+                    <a class="btn btn-outline-secondary" href="{% url 'post_detail' slug=post.slug %}">No</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

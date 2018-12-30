@@ -1,0 +1,85 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'users/css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="text-center container">
+        <h2>Join The Community</h2>
+    </div>
+    <form action="" method="POST" class="bg-light">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row my-5">
+                <div class="col-12 form-group">
+                    <p class="errors">
+                        {{ form.username.errors}}
+                    </p>
+                    <p>
+                        {{ form.username.label_tag}}
+                    </p>
+                    <div>
+                        {{ form.username }}
+                    </div>
+                    <small>
+                        {{ form.username.help_text }}
+                    </small>
+                    <hr>
+                </div>
+                <div class="col-12 form-group">
+                    <p class="errors">
+                        {{ form.email.errors}}
+                    </p>
+                    <p>
+                        {{ form.email.label_tag}}
+                    </p>
+                    <div>
+                        {{ form.email }}
+                    </div>
+                    <small>
+                        {{ form.email.help_text }}
+                    </small>
+                    <hr>
+                </div>
+                <div class="col-12 form-group">
+                    <p class="errors">
+                        {{ form.password1.errors}}
+                    </p>
+                    <p>
+                        {{ form.password1.label_tag}}
+                    </p>
+                    <div>
+                        {{ form.password1 }}
+                    </div>
+                    <small>
+                        {{ form.password1.help_text }}
+                    </small>
+                    <hr>
+                </div>
+                <div class="col-12 form-group">
+                    <p class="errors">
+                        {{ form.password2.errors}}
+                    </p>
+                    <p>
+                        {{ form.password2.label_tag}}
+                    </p>
+                    <div>
+                        {{ form.password2 }}
+                    </div>
+                    <small>
+                        {{ form.password2.help_text }}
+                    </small>
+                    <hr>
+                </div>
+            </div>
+            <button class="btn"  type="submit">Register</button>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

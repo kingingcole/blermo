@@ -1,0 +1,66 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="my-3 msg-container container">
+            <div class="row text-center alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <img src="{{ u.profile.avatar.url }}" alt="profile image"
+                     class="d-block mx-auto img-fluid profile-img border-success border">
+            </div>
+            <div class="col-sm-12 col-md-8">
+                <h2 class="col-12">{{ u.last_name }} {{ u.first_name }}</h2>
+                <p class="lead col-12">@{{ u.username }}</p>
+                <p class="lead col-12">{{ u.profile.age }}</p>
+                <p class="lead col-12">{{ u.profile.follows.count }} following</p>
+                <p class="lead col-12">{{ n_o_f }} follower {% if n_o_f > 1 %}s{% endif %}</p>
+                <p class="lead col-12">{{ u.profile.bio }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                 {% for post in p %}
+                <div class="post-cont">
+                    <h3><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
+                    <p class="mute"><a href="{% url 'profile' post.author.username %}">{{ post.author.username }}</a> | {{ post.date_posted }}</p>
+                    <br>
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="post-image" class="post-image img-fluid">
+                    {% endif %}
+                    <p class="lead">{{ post.summary }}</p>
+                    <small>
+                        {{ post.likes.count }}
+                        {% if post.likes.count == 1 %}
+                        like
+                        {% else %}
+                        likes
+                        {% endif %}
+                    </small>
+                    <hr>
+                    <br>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

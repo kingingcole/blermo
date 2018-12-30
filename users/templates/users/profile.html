@@ -1,0 +1,174 @@
+{% extends 'main_site/base.html' %}
+{% load static %}
+
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <!-- <div class="bg-success container message">
+      hello
+        {% if messages %}
+        {% for message in messages %}
+        <div class="my-3 msg-container container">
+            <div class="row text-center alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div> -->
+
+
+    <div class="profile-header py-5 container-fluid">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <img src="{{ u.profile.avatar.url }}" alt="profile-image"
+                                 class="offset-md-6 profile-image img-fluid">
+                        </div>
+                        <div class="col-sm-12 account-details col-md-6 my-auto">
+                            <h2 class="fullname">{{ u.last_name }} {{ u.first_name }}</h2>
+                            <h4 class="username">@{{ u.username }}</h4>
+                            {% if user.is_authenticated %}
+                              {% if user == u %}
+                              <a href="{% url 'profile_update' %}"><button class="follow-toggle" type="button">Update Profile</button></a>
+                              {% else %}
+                              {% if u.profile in user.profile.follows.all %}
+                                  <button id="follow-btn" class="follow-toggle" type="button">Unfollow</button>
+                              {% else %}
+                                  <button id="follow-btn" class="follow-toggle" type="button">Follow</button>
+                              {% endif %}
+                              <!-- <button id="follow-btn" class="follow-toggle" type="button">Follow</button> -->
+                              {% endif %}
+                            {% else %}
+                              <p class="login-to-follow"><a style='color:rgb(115, 35, 71)' href="{% url 'login' %}">Login</a> to follow user</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="activity my-auto col-12">
+                    <div class="text-center row">
+                        <div class="col-4">
+                            <p class="number">{{ n_o_f }}</p>
+                            <p class="activity-type">followers</p>
+                        </div>
+                        <div class="col-4">
+                            <p class="number">{{ u.profile.follows.count }}</p>
+                            <p class="activity-type">following</p>
+                        </div>
+                        <div class="col-4">
+                            <a href="#post-section">
+                              <p class="number">{{ u.post_set.count }}</p>
+                              <p class="activity-type">posts</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-4 pt-4 mt-4">
+        <div class="row">
+            <div class="about col-sm-10 col-md-8 offset-md-2">
+                <h1 class="heading mt-4">Bio</h1>
+                <p class="muted">{{ u.profile.bio }}</p>
+
+                 <h1 class="heading">College</h1>
+                 <p class="muted">College of Health Sciences, {{ u.profile.get_college_display }}</p>
+
+                 <h1 class="heading">Year in College</h1>
+                 <p class="muted">{{ u.profile.year_in_college }}</p>
+
+                <h1 class="heading">Age</h1>
+                <p>
+                    {% if u.profile.calculate_age == False %}
+
+                    {% else %}
+                    {{ u.profile.calculate_age }} years
+                    {% endif %}
+                </p>
+
+                <!-- <h1 class="heading">College</h1>
+                <p>{{ u.profile.college }}</p>
+
+                <h1 class="heading">Year</h1>
+                <p>{{ u.profile.level }}</p> -->
+
+                <h1 class="heading">Links</h1>
+                <a href=""><i class="fab fa-facebook-f"></i></a>
+                <a href=""><i class="fab fa-twitter"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-4 pt-2 posts" id="post-section">
+        <div class="row">
+            <div class="col-sm-10 col-md-8 offset-md-2">
+                <h1 class="heading">Posts</h1>
+                <div class="row">
+                    {% for post in p %}
+                    <div class="col-md-6 py-4 col-lg-4">
+                        <img src="{{ post.image.url }}" alt="post image" class="img-fluid">
+                        <h2 class="post-title"><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a>
+                        </h2>
+                        <small>{{ post.date_posted }}</small><br>
+                        <div class="interactions mt-2">
+                            <i class="fas fa-heart"></i>
+                            <span class="mr-2">{{ post.likes.count }}</span>
+                            <i class="far fa-comments"></i><span> {{ post.comment_set.count }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+<script type="text/javascript">
+
+  $(".follow-toggle").click(function(e){
+
+    $.ajax({
+      url:'{% url 'follow_toggle' %}',
+      type: 'GET',
+      data: {
+        "userToFollow": '{{ u }}',
+        "userFollowing": '{{ user.username }}',
+      },
+      dataType: "Intelligent Guess",
+
+
+    });
+
+   {% if user.is_authenticated %}
+    var x = document.getElementById('follow-btn');
+    if (x.innerText === 'Unfollow'){
+      x.innerText = 'Follow';
+    } else{
+      x.innerText = 'Unfollow'
+    }
+    {% endif %}
+  })
+
+</script>
+
+{% endblock %}
