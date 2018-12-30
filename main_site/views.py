@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Contact
 from django.contrib import messages
-from Post.models import Post
 
 
 # Create your views here.

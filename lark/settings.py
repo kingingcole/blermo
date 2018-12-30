@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import django_heroku
 import os
+from .secrets import *
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6(7cx+^)a@2wwxq+h$=2l*+r5d03&+j4!v9@ym_g*u6!4ej2jp'
+#secret key goes here
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '.herokuapp.com']
 
 # Application definition
 
@@ -134,10 +137,7 @@ LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
 
-AWS_ACCESS_KEY_ID = 'AKIAIADPOAOM5GQ34P4A'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'blermo'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+#AWS details go here
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
@@ -147,6 +147,10 @@ STATICFILES_DIRS = [
 ]
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+#for media storage
+
+DEFAULT_FILE_STORAGE = 'lark.storage_backends.MediaStorage'
 
 
 # django_heroku.settings(locals())

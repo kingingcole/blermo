@@ -1,0 +1,99 @@
+.masthead {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9)), url('/static/main_site/img/medical-bg.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 330px;
+    padding-bottom: 100px;
+    height: 100vh;
+    font-family: serif;
+}
+
+.masthead-text {
+    transform: translateY(-40%);
+}
+
+.masthead h2 {
+    max-width: 85%;
+    margin: auto;
+    color: #fff
+}
+
+.masthead a.cta {
+    padding: 20px;
+    margin: auto;
+    width: 200px;
+    border-radius: 4px;
+    background-color: transparent !important;
+    border: 1px solid white;
+    color: white
+}
+.masthead a.cta:hover{
+    background-color: white !important;
+    color: rgb(37, 108, 66) !important;
+}
+
+
+.no-gutter {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.no-gutter > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.benefits .fas {
+    font-size: 4.9em;
+    color: rgb(179, 41, 93);
+    padding: 0.8em 0;
+}
+
+section p {
+    color: rgb(44, 140, 83);
+    font-size: 1.2em;
+    font-family: serif;
+}
+
+.info .cta {
+    max-width: 40%;
+    margin: auto;
+    padding: 15px 26px;
+    border-radius: 4px;
+    border: 1px solid rgb(37, 108, 66) !important;
+    background-color: white !important;
+    color: rgb(37, 108, 66) !important;
+}
+.info .cta:hover{
+    background-color: #256C42 !important;
+color: white !important;
+}
+.info {
+    background:
+}
+
+.info p {
+    color: gray
+}
+
+@media screen and (min-width: 990px) {
+    .masthead {
+        height: 110vh
+    }
+
+    .masthead h2 {
+        font-size: 3.6em;
+        margin-bottom: 0.8em
+    }
+
+    .masthead a.cta {
+        font-size: 1.3em;
+        margin-top: 20 !important;
+        padding: 1em 1.9em
+    }
+
+    .masthead-text {
+        transform: translateY(-35%);
+    }
+}

@@ -1,0 +1,117 @@
+nav {
+  /* background-color: red; */
+  background-color: #ddd;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+  transition: all 0.3s
+}
+
+.nav-toggle {
+  background-color: white;
+}
+
+.navbar-brand, .lark {
+  font-family: fantasy;
+  letter-spacing: 7px;
+  color: rgb(44, 140, 83)
+}
+
+.fa-bars {
+  color: rgb(44, 140, 83);
+}
+
+.navbar-toggler {
+  border: rgb(44, 140, 83) 1px solid
+}
+
+nav a {
+  color: rgb(115, 35, 71);
+  text-align: center;
+  padding: 15px !important;
+  font-family: serif;
+}
+
+nav a:hover {
+  text-decoration: none;
+  color: rgb(44, 140, 83)
+}
+
+.active {
+  text-decoration: none;
+  color: rgb(44, 140, 83)
+}
+
+.cta {
+  background: rgb(44, 140, 83) !important;
+  border-radius: 3px;
+  transition: all 0.2s;
+  color: #fff
+}
+
+.get-started:hover {
+  background: rgb(37, 108, 66) !important;
+  color: white !important;
+  cursor: pointer;
+  transition: all 0.1s ease-in
+}
+
+section {
+  margin-top: 62px
+}
+
+button {
+  border: none
+}
+
+footer {
+  padding: 60px 0;
+  background-color: #333;
+  color: white;
+  padding-bottom: 0 !important
+}
+
+.ft-section {
+  margin: 15px 0
+}
+
+footer h5 {
+  letter-spacing: 0.5em;
+  margin-bottom: 1.1em;
+}
+
+footer a {
+  color: #aaa
+}
+
+footer a:hover {
+  color: #eee;
+  text-decoration: none
+}
+
+footer input {
+  margin: 15px 0
+}
+
+.sub a {
+  border: 1px solid white;
+  padding: 10px
+}
+
+a {
+  color: inherit
+}
+
+a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media screen and (max-width:990px) {
+  nav {
+    /* background-color: #ededed; */
+    background-color: #ddd !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    transition: all 0.3s
+  }
+}

@@ -6,6 +6,8 @@ from PIL import Image
 from datetime import date
 import dateutil
 
+from django.core.files.storage import default_storage as storage
+
 
 
 # Create your models here.
@@ -15,7 +17,7 @@ class Profile(models.Model):
     avatar = models.ImageField(default='default.jpg', upload_to='profile_pics')
     dob = models.DateField(blank=True, null=True)
     bio = models.TextField(max_length=400, blank=True)
-    following = models.ManyToManyField('self', related_name='follows', symmetrical=False)
+    following = models.ManyToManyField('self', related_name='follows', symmetrical=False, blank=True, null=True)
     #follow = models.ManyToManyField('self', related_name='followed', symmetrical=False)
     joined_at = models.DateField(auto_now_add=True)
 
@@ -89,10 +91,15 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        img = Image.open(self.avatar.path)
+        # img = Image.open(self.avatar.path
+        img = Image.open(storage.open(self.avatar.name))
         output_size = (200, 200)
         img.thumbnail(output_size)
-        img.save(self.avatar.path)
+        # img.save(self.avatar.url)
+        fh = storage.open(self.avatar.name, "w")
+        format = 'png'  # You need to set the correct image format here
+        img.save(fh, format)
+        fh.close()
 
     def __str__(self):
         return f'Profile of ' + self.user.username

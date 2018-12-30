@@ -7,6 +7,8 @@ from django.urls import reverse
 
 import math
 
+from django.core.files.storage import default_storage as storage
+
 
 
 # Create your models here.
@@ -30,10 +32,16 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        img = Image.open(self.image.path)
+        # img = Image.open(self.image.path)
+        img = Image.open(storage.open(self.image.name))
         output_size = (200, 200)
         img.thumbnail(output_size)
-        img.save(self.image.path)
+        # img.save(self.image.url)
+        fh = storage.open(self.image.name, "w")
+        format = 'png'  # You need to set the correct image format here
+        img.save(fh, format)
+        fh.close()
+
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
