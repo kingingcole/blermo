@@ -78,16 +78,17 @@ def follow_toggle(request):
         user_to_follow = User.objects.get(username=u_t_f)
         user_following = User.objects.get(username=u_f)
 
-        if user_to_follow.profile in user_following.profile.follows.all():
-            user_following.profile.follows.remove(user_to_follow.profile)
-        else:
-            user_following.profile.follows.add(user_to_follow.profile)
+        if request.user != user_to_follow and user_following != user_to_follow:
+            if user_to_follow.profile in user_following.profile.follows.all():
+                user_following.profile.follows.remove(user_to_follow.profile)
+            else:
+                user_following.profile.follows.add(user_to_follow.profile)
 
-        data={
-            'hello': 'hello'
-        }
+            data = {
+                'hello': 'hello'
+            }
 
-        return JsonResponse(data)
+            return JsonResponse(data)
 
 
 def following(request, username):

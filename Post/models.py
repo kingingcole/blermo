@@ -115,10 +115,10 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=150)
     date_commented = models.DateTimeField(auto_now_add=True)
-    comment_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     likes = models.ManyToManyField(User, blank=True, related_name='comment_likes')
 
     class Meta:
