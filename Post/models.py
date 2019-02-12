@@ -14,7 +14,7 @@ from django.core.files.storage import default_storage as storage
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=50)
-    content = models.TextField()
+    body = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     likes = models.ManyToManyField(User, blank=True, related_name='post_likes')

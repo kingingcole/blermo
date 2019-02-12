@@ -23,6 +23,7 @@ from main_site import views as ms_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('Post.apiUrls')),
     path('follow/', usersViews.follow_toggle, name='follow_toggle'),
     path('like/', PostLikeToggle, name='post_like_toggle'),
     path('create/', PostCreate.as_view(), name='post_create'),

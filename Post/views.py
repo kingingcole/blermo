@@ -146,3 +146,8 @@ def PostComment(request, slug):
             new_comment.save()
 
     return redirect('/feed/article/' + post.slug + '#commentBox')
+
+
+
+
+
