@@ -71,7 +71,7 @@ class PostDetail(DetailView):
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'Post/post-create.html'
-    fields = ['title', 'image', 'content']
+    fields = ['title', 'image', 'body']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
