@@ -25,10 +25,10 @@ class Post(models.Model):
         ordering = ['-date_posted']
 
     def summary(self):
-        if len(self.content) > 100:
-            return self.content[0:100] + '...'
+        if len(self.body) > 100:
+            return self.body[0:100] + '...'
         else:
-            return self.content
+            return self.body
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
