@@ -14,7 +14,6 @@ import django_heroku
 import os
 from .secrets import *
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#secret key goes here
+# secret key goes here
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -50,6 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # for the django REST api endpoint
     'django.middleware.common.CommonMiddleware',  # for the django REST api endpoint
+    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -143,8 +143,7 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
-
-#AWS details go here
+# AWS details go here
 
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
@@ -156,9 +155,8 @@ STATICFILES_DIRS = [
 # STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-#for media storage
+# for media storage
 
 DEFAULT_FILE_STORAGE = 'lark.storage_backends.MediaStorage'
-
 
 # django_heroku.settings(locals())
