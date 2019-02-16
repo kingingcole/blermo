@@ -42,14 +42,9 @@ INSTALLED_APPS = [
     'users',
     'Post',
     'storages',
-    'rest_framework',  # for the django REST api endpoint
-    'corsheaders'  # for the django REST api endpoint
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # for the django REST api endpoint
-    'django.middleware.common.CommonMiddleware',  # for the django REST api endpoint
-    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,9 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    '*'
-)
 
 SITE_ID = 1
 

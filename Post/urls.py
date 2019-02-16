@@ -1,10 +1,7 @@
 from django.urls import path
 from .views import Feed, PostDetail, PostUpdate, PostDelete, PostComment
-from . import apiViews
 
 urlpatterns = [
-    path('posts/', apiViews.PostList.as_view(), name='feed'),
-    path('posts/<str:slug>', apiViews.PostDetail.as_view(), name='feed'),
     path('', Feed, name='feed'),
 
     path('article/<str:slug>/', PostDetail.as_view(), name='post_detail'),
