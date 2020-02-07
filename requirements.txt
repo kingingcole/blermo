@@ -36,7 +36,7 @@ pypi==2.1
 python-dateutil==2.7.5
 pytz==2018.7
 requests==2.20.0
-s3transfer==0.1.13
+s3transfer==0.3.3
 simplejson==3.16.0
 six==1.11.0
 sorl-thumbnail==12.4.1
