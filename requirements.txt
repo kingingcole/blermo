@@ -19,7 +19,7 @@ factory-boy==2.11.1
 Faker==1.0.0
 Flask==1.0.2
 gunicorn==19.9.0
-idna==2.7
+idna==3.1
 image==1.5.27
 itsdangerous==1.1.0
 Jinja2==2.10
