@@ -1,0 +1,18 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: s3transfer
+    versions:
+    - 0.3.4
+    - 0.3.6
+    - 0.3.7
+    - 0.4.0
+    - 0.4.1
+  - dependency-name: jinja2
+    versions:
+    - 2.10.1
